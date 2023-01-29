@@ -69,6 +69,11 @@ return [
             'image' => 'assets/img/sponsors/meema.png',
             'max_width' => '100px'
         ],
+        'Zapiet' => [
+            'website' => 'https://www.zapiet.com/',
+            'image' => 'assets/img/sponsors/zapiet.svg',
+            'max_width' => '100px'
+        ],
         'Scout APM' => [
             'website' => 'https://scoutapm.com/',
             'image' => 'assets/img/sponsors/scout-apm.jpg',
