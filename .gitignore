@@ -1,5 +1,4 @@
 /resources/docs
-/resources/www/node_modules
 /node_modules
 /public/hot
 /public/mix-manifest.json

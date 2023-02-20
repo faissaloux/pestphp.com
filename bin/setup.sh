@@ -11,7 +11,3 @@ php artisan key:generate
 source "$(dirname "$0")/checkout_latest_docs.sh"
 npm install
 npm run prod
-
-cd resources/www
-npm install
-npm run build

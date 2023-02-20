@@ -17,7 +17,9 @@ use App\Http\Controllers\ShowScreencastController;
 |
 */
 
-Route::get('/', fn() => file_get_contents(public_path('www/index.html')));
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/docs/ide-plugins', IDEPluginsController::class)->name('ide-plugins');
 
