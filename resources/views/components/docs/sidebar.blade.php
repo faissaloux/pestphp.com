@@ -1,20 +1,28 @@
-<nav x-cloak class="hidden lg:block"
-	:class="{ 'block lg:block': isOpen === true, 'hidden lg:block': isOpen === false }"
-	x-transition:enter="transition-all ease-in-out duration-700"
-	x-transition:enter-start="-left-full"
-	x-transition:enter-end="left-0"
-	x-transition:leave="transition-all ease-in-out duration-700"
-	x-transition:leave-start="top-0"
-	x-transition:leave-end="-top-full">
+<nav class="lg:block hidden"
+    :class="{ 'block lg:block': isOpen === true, 'hidden lg:block': isOpen === false }"
+    x-transition:enter="transition-all ease-in-out duration-700"
+    x-transition:enter-start="-left-full"
+    x-transition:enter-end="left-0"
+    x-transition:leave="transition-all ease-in-out duration-700"
+    x-transition:leave-start="top-0"
+    x-transition:leave-end="-top-full">
 
-	<div class="lg:sticky lg:w-56 xl:w-64 lg:px-0 lg:top-0 overflow-y-auto scrollbar transition-colors duration-700 ease-in-out bg-white lg:bg-transparent
-	mt-1 dark:bg-gray-800 lg:dark:bg-transparent lg:h-screen fixed left-0 top-nav z-50 overflow-x-auto text-left h-full px-4 h-screen-24 w-full"
-	x-ref="dialog" x-on:keydown.escape.window="close()">
-        <div class="lg:hidden my-4">
-            @include('_partials.nav-items')
-        </div>
-		<div class="pt-4 pb-6 lg:pr-4 xl:pl-0 docs-nav">
-			{{ $slot }}
-		</div>
-	</div>
+    <div x-ref="dialog" x-on:keydown.escape.window="close()"
+        class="
+            lg:w-48 xl:w-56 lg:h-screen w-full
+            lg:mt-8
+            fixed lg:relative top-0 left-0 z-50
+            h-screen lg:h-auto
+            bg-white dark:bg-gray-800 bg-pattern lg:!bg-transparent lg:!bg-none
+            pt-16 lg:pt-0
+            text-left
+        ">
+            <div class="
+                docs-nav h-full lg:h-auto
+                pt-6 lg:pt-0.5 pb-6 px-4 lg:pl-0 lg:pr-4
+                overflow-y-auto overflow-x-auto lg:overflow-inherit
+            ">
+                {{ $slot }}
+            </div>
+    </div>
 </nav>

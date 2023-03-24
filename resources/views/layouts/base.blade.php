@@ -1,56 +1,47 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
+    <title>{{ $title = empty($title) ? config('site.title') : "{$title} | ".config('site.title') }}</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pest | The elegant PHP testing framework</title>
+
+    <meta name="twitter:site" content="@pestphp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@pestphp">
+    <meta name="twitter:image:alt" content="{{ $title }}">
+
+    <meta charset="UTF-8">
+    <meta name="author" content="Nuno Maduro">
+    <meta name="keywords" content="PHP, Pest, Testing Framework">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <meta name="description" content="{{ $description = $description ?? 'Pest is a testing framework with a focus on simplicity, meticulously designed to bring back the joy of testing in PHP.' }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ $title }}">
+    <meta property="og:description" content="{{ $description }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+
+    <meta property="og:image" content="https://pestphp.com/assets/img/og.jpg">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @php
-        $newTitle = empty($title) ? config('site.title') : "{$title} | ".config('site.title')
-    @endphp
-    <title>{{ $newTitle }}</title>
 
-    <meta name="description" content="{{ $description ?? config('site.description') }}">
-
-    <meta property="og:site_name" content="{{ config('site.title') }}"/>
-    <meta property="og:title" content="{{ $newTitle }}"/>
-    <meta property="og:description" content="{{ $description ?? config('site.description') }}"/>
-    <meta property="og:url" content="{{ url()->current() }}"/>
-    <meta property="og:image" content="https://pestphp.com/assets/img/og.jpg"/>
-    <meta property="og:type" content="website"/>
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:creator" content="@enunomaduro">
-    <meta name="twitter:image:alt" content="Pest - An elegant PHP Testing Framework">
-
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/www/favicon.svg" type="image/svg+xml">
 
     {{ $head ?? '' }}
 
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
+    <script>
+        if (!('theme' in localStorage)) {
+            localStorage.theme = 'dark';
+        }
+
+        document.documentElement.classList[localStorage.theme === 'dark' ? 'add' : 'remove']('dark');
+    </script>
     @stack('styles')
 
-    @if (! request()->is('/'))
-        <script>
-            function updateTheme() {
-                if (!('mode' in localStorage)) {
-                    localStorage.mode = 'light';
-                }
-
-                switch (localStorage.mode) {
-                    case 'dark':
-                        document.documentElement.classList.add('dark');
-                        break;
-
-                    case 'light':
-                        document.documentElement.classList.remove('dark');
-                        break;
-                }
-            }
-
-            updateTheme();
-        </script>
-    @endif
 </head>
+
 <body {{ $attributes->except(['title', 'description']) }}>
 
 {{ $slot }}
@@ -59,14 +50,7 @@
 
 @stack('scripts')
 
-@if (app()->environment('production'))
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-61404619-4"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-61404619-4');
-    </script>
-@endif
+<script src="https://cdn.usefathom.com/script.js" data-site="NYURIQIN" defer></script>
+
 </body>
 </html>

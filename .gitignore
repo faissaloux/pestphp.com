@@ -1,10 +1,13 @@
 /resources/docs
+/resources/www/node_modules
 /node_modules
+/public/build
 /public/hot
 /public/mix-manifest.json
 /public/uploads
 /public/css
 /public/js
+/public/images
 /public/storage
 /storage/*.key
 /vendor

@@ -1,19 +1,17 @@
-
 const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors')
 
 module.exports = {
-    mode: 'jit',
     darkMode: 'class',
-    purge: {
-        content: [
-            'resources/views/**/*.blade.php',
-            'resources/js/**/*.js',
-        ]
-    },
+    content: [
+        'resources/views/**/*.blade.php',
+        'resources/js/**/*.js',
+    ],
     theme: {
         extend: {
             colors: {
                 ...defaultTheme.color,
+                gray: colors.zinc,
                 discord: '#7289da',
                 twitter: '#1DA1F2',
             },
@@ -22,9 +20,9 @@ module.exports = {
             },
             fontFamily: {
                 sans: [
-                    'Nunito Sans', ...defaultTheme.fontFamily.sans
+                    'Inter', ...defaultTheme.fontFamily.sans
                 ],
-                system:[
+                system: [
                     `system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",
           Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji",
           "Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"`
@@ -79,7 +77,7 @@ module.exports = {
     },
     plugins: [
         require('@tailwindcss/typography'),
-        function({ addUtilities }) {
+        ({ addUtilities }) => {
             const newUtilities = {
                 '.transition-fast': {
                     transition: 'all .2s ease-out',
@@ -87,8 +85,16 @@ module.exports = {
                 '.transition': {
                     transition: 'all .5s ease-out',
                 },
+                '.overflow-inherit': {
+                    overflow: 'inherit'
+                }
             }
             addUtilities(newUtilities)
+        },
+        ({ addVariant }) => {
+            addVariant('scrollbar', '&::-webkit-scrollbar');
+            addVariant('scrollbar-track', '&::-webkit-scrollbar-track');
+            addVariant('scrollbar-thumb', '&::-webkit-scrollbar-thumb');
         },
     ],
 };
